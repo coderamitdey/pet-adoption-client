@@ -4,90 +4,76 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
 const RecentListings = () => {
-  const [listings, setListings] = useState([]);
-  const [showAll, setShowAll] = useState(false); 
-  const navigate = useNavigate();
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const [listings, setListings] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
-
     axios
-      .get("http://localhost:5000/api/listings") // 
+      .get("http://localhost:5000/api/listings")
       .then(res => {
-        const data = Array.isArray(res.data) ? res.data : res.data.data;
-        setListings(data || []);
+        setListings(res.data || []);
       })
-      .catch(err => console.error("Error fetching listings:", err));
+      .catch(err => console.error(err));
   }, []);
-
-
-  const displayedListings = !user
-    ? listings.slice(0, 6) 
-    : showAll
-    ? listings 
-    : listings.slice(0, 6); 
 
   const handleShowMore = () => {
     if (!user) {
-     
       navigate("/auth/login");
-    } else {
-     
-      setShowAll(prev => !prev);
+      return;
     }
+    setVisibleCount(listings.length); // show all
+  };
+
+  const handleShowLess = () => {
+    setVisibleCount(6);
   };
 
   return (
-    <div className="mt-10 px-4">
+    <div className="mt-10">
       <h2 className="text-2xl font-bold mb-4">Recent Listings</h2>
-
-      {listings.length === 0 ? (
-        <p className="text-gray-500">No listings found.</p>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {displayedListings.map(item => (
-              <div key={item._id} className="card bg-base-100 shadow-lg">
-                <figure>
-                  <img
-                    src={item.image || "https://via.placeholder.com/300x200"}
-                    alt={item.name}
-                    className="h-48 w-full object-cover"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h3 className="card-title">{item.name}</h3>
-                  <p>Category: {item.category}</p>
-                  <p>{item.price ? `BDT : ${item.price}` : "Free for Adoption"}</p>
-
-                  <p>Location: {item.location}</p>
-                  <button
-                    className="btn btn-primary mt-2"
-                    onClick={() => navigate(`/listing/${item._id}`)}
-                  >
-                    See Details
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Show More / Show Less button */}
-          {listings.length > 6 && (
-            <div className="flex justify-center mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {listings.slice(0, visibleCount).map(item => (
+          <div key={item._id} className="card bg-base-100 shadow-lg">
+            <figure>
+              <img
+                src={item.image || "https://via.placeholder.com/300x200"}
+                alt={item.name}
+                className="h-48 w-full object-cover"
+              />
+            </figure>
+            <div className="card-body">
+              <h3 className="card-title">{item.name}</h3>
+              <p>Category: {item.category}</p>
+              <p>
+                Price: {item.price ? `৳${item.price.toLocaleString()}` : "Free for Adoption"}
+              </p>
+              <p>Location: {item.location}</p>
               <button
-                onClick={handleShowMore}
-                className="btn btn-outline btn-md"
+                className="btn btn-primary mt-2"
+                onClick={() => navigate(`/listing/${item._id}`)}
               >
-                {!user
-                  ? "Show More (Login Required)"
-                  : showAll
-                  ? "Show Less"
-                  : "Show More"}
+                See Details
               </button>
             </div>
+          </div>
+        ))}
+      </div>
+
+      {listings.length > 6 && (
+        <div className="flex justify-center mt-6">
+          {visibleCount === 6 ? (
+            <button className="btn btn-outline" onClick={handleShowMore}>
+              Show More
+            </button>
+          ) : (
+            <button className="btn btn-outline" onClick={handleShowLess}>
+              Show Less
+            </button>
           )}
-        </>
+        </div>
       )}
     </div>
   );
