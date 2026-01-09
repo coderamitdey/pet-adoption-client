@@ -80,10 +80,10 @@ const Navbar = () => {
                   <Link to="/add-listing">Add Listing</Link>
                 </li>
                 <li>
-                  <Link to="/my-listings">My Listings</Link>
+                  <Link to="/dashboard/my-listings">My Listings</Link>
                 </li>
                 <li>
-                  <Link to="/my-orders">My Orders</Link>
+                  <Link to="/dashboard/my-orders">My Orders</Link>
                 </li>
               </>
             )}
@@ -112,10 +112,10 @@ const Navbar = () => {
                 <Link to="/add-listing">Add Listing</Link>
               </li>
               <li>
-                <Link to="/my-listings">My Listings</Link>
+                <Link to="/dashboard/my-listings">My Listings</Link>
               </li>
               <li>
-                <Link to="/my-orders">My Orders</Link>
+                <Link to="/dashboard/my-orders">My Orders</Link>
               </li>
             </>
           )}

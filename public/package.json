@@ -1,0 +1,162 @@
+
+  {
+    "name": "Golden Retriever Puppy",
+    "category": "Dog",
+    "price": 5000,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/xSQ7rs5L/dog1.jpg",
+    "description": "Friendly and playful golden retriever puppy."
+  },
+  {
+    "name": "Siamese Kitten",
+    "category": "Cat",
+    "price": 3000,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co.com/LT80xRm/cat1.jpg",
+    "description": "Cute Siamese kitten ready for adoption."
+  },
+  {
+    "name": "Parrot",
+    "category": "Bird",
+    "price": 1500,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/Qv5F9xPp/bird1.jpg",
+    "description": "Colorful parrot with talking ability."
+  },
+  {
+    "name": "Persian Cat",
+    "category": "Cat",
+    "price": 4000,
+    "location": "Sylhet, Bangladesh",
+    "image": "https://i.ibb.co.com/Gfkymx5M/cat2.jpg",
+    "description": "Beautiful long-haired Persian cat."
+  },
+  {
+    "name": "Beagle Puppy",
+    "category": "Dog",
+    "price": 4500,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/kVT16Ld7/dog2.jpg",
+    "description": "Active and friendly Beagle puppy."
+  },
+  {
+    "name": "Cockatiel",
+    "category": "Bird",
+    "price": 1000,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co.com/6JWZB49d/bird2.jpg",
+    "description": "Friendly cockatiel, loves attention."
+  },
+  {
+    "name": "Siberian Husky",
+    "category": "Dog",
+    "price": 6000,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/dwdjNgT8/dog3.jpg",
+    "description": "Beautiful blue-eyed Siberian Husky."
+  },
+  {
+    "name": "Ragdoll Kitten",
+    "category": "Cat",
+    "price": 3500,
+    "location": "Rajshahi, Bangladesh",
+    "image": "https://i.ibb.co.com/BHbgYzFs/cat3.jpg",
+    "description": "Soft and playful Ragdoll kitten."
+  },
+  {
+    "name": "Parakeet",
+    "category": "Bird",
+    "price": 2000,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/gb3xQmyx/bird3.jpg",
+    "description": "Small and cheerful parakeet for your home."
+  },
+  {
+    "name": "French Bulldog Puppy",
+    "category": "Dog",
+    "price": 5700,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co.com/7dK2H5g5/dog4.webp",
+    "description": "Cute French Bulldog puppy ready for adoption."
+  },
+  {
+    "name": "Maine Coon Cat",
+    "category": "Cat",
+    "price": 4500,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/BHRB88pr/cat4.jpg",
+    "description": "Large, friendly Maine Coon cat."
+  },
+  {
+    "name": "Lovebird",
+    "category": "Bird",
+    "price": 2080,
+    "location": "Khulna, Bangladesh",
+    "image": "https://i.ibb.co.com/HLXCgxn1/bird4.jpg",
+    "description": "Colorful lovebird, very social and active."
+  },
+  {
+    "name": "Pomeranian Puppy",
+    "category": "Dog",
+    "price": 550,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/MDp0ywhQ/dog5.jpg",
+    "description": "Tiny Pomeranian puppy with fluffy fur."
+  },
+  {
+    "name": "Bengal Cat",
+    "category": "Cat",
+    "price": 4500,
+    "location": "Sylhet, Bangladesh",
+    "image": "https://i.ibb.co.com/xKtpncCR/cat5.jpg",
+    "description": "Active and striking Bengal cat."
+  },
+  {
+    "name": "African Grey Parrot",
+    "category": "Bird",
+    "price": 2000,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/GvYT9ttD/bird5.jpg",
+    "description": "Intelligent African Grey, talks well."
+  },
+  {
+    "name": "Doberman Puppy",
+    "category": "Dog",
+    "price": 6500,
+    "location": "Rajshahi, Bangladesh",
+    "image": "https://i.ibb.co.com/Mxy5b8fF/dog6.jpg",
+    "description": "Loyal and energetic Doberman puppy."
+  },
+  {
+    "name": "Scottish Fold Cat",
+    "category": "Cat",
+    "price": 4000,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/mC984sXL/cat6.jpg",
+    "description": "Adorable Scottish Fold cat with folded ears."
+  },
+  {
+    "name": "Canary",
+    "category": "Bird",
+    "price": 1550,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co.com/1J0MGL0B/bird6.jpg",
+    "description": "Small, bright yellow canary for singing."
+  },
+  {
+    "name": "Chihuahua Puppy",
+    "category": "Dog",
+    "price": 4300,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/gLp4bJwv/dog7.jpg",
+    "description": "Tiny Chihuahua puppy, very playful."
+  },
+  {
+    "name": "Ragdoll Cat",
+    "category": "Cat",
+    "price": 2350,
+    "location": "Khulna, Bangladesh",
+    "image": "https://i.ibb.co.com/2YMZXX5R/cat7.jpg",
+    "description": "Gentle and soft Ragdoll cat for families."
+  }
+
