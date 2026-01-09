@@ -1,32 +1,34 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
+import { toast } from "react-hot-toast";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
   const logout = async () => {
-    await auth.signOut();
-    setUser(null);
+    try {
+      await signOut(auth);
+      toast.success("Logout successful!");
+    } catch (err) {
+      toast.error("Logout failed!");
+    }
   };
 
-  return (
-    <AuthContext.Provider value={{ user, logout, loading }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+  const authInfo = { user, loading, logout };
 
+  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+};
 
 export const useAuth = () => useContext(AuthContext);

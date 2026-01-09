@@ -1,15 +1,49 @@
 import React from "react";
 import { Link } from "react-router";
-import useAuth from "../hooks/useAuth";
-// import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
+import Swal from "sweetalert2";
 import pawImg from "../assets/pawmart.jpg";
 
 const Navbar = () => {
   const { user, logout, loading } = useAuth();
 
+ const handleLogout = () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out from your account.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, logout",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      logout()
+        .then(() =>
+          Swal.fire({
+            icon: "success",
+            title: "Logged out!",
+            text: "You have been logged out successfully.",
+            timer: 1500,
+            showConfirmButton: false,
+          })
+        )
+        .catch((err) =>
+          Swal.fire({
+            icon: "error",
+            title: "Logout failed!",
+            text: err.message,
+          })
+        );
+    }
+  });
+};
+
+
   return (
     <nav className="navbar bg-pink-100 mb-2 shadow-md px-4">
-      
+   
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -29,7 +63,6 @@ const Navbar = () => {
             </svg>
           </div>
 
-          
           <ul
             tabIndex={-1}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
@@ -63,6 +96,7 @@ const Navbar = () => {
         <h1 className="font-bold text-3xl text-pink-600">PawMart</h1>
       </div>
 
+      {/* Navbar Center */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 font-semibold text-black">
           <li>
@@ -88,16 +122,22 @@ const Navbar = () => {
         </ul>
       </div>
 
-      
+      {/* Navbar End */}
       <div className="navbar-end flex items-center gap-3">
         {loading ? (
           <span className="loading loading-spinner loading-md text-primary"></span>
         ) : !user ? (
           <>
-            <Link to="/auth/login" className="btn btn-primary btn-md text-white">
+            <Link
+              to="/auth/login"
+              className="btn btn-primary btn-md text-white"
+            >
               Login
             </Link>
-            <Link to="/auth/register" className="btn btn-accent btn-md text-white">
+            <Link
+              to="/auth/register"
+              className="btn btn-accent btn-md text-white"
+            >
               Register
             </Link>
           </>
@@ -105,13 +145,13 @@ const Navbar = () => {
           <>
             <Link to="/profile">
               <img
-                src={user.photoURL || ""}
+                src={user.photoURL || "https://via.placeholder.com/150"}
                 alt="User"
                 className="w-10 h-10 rounded-full border-2 border-orange-400"
               />
             </Link>
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="btn btn-error btn-md text-white"
             >
               Logout

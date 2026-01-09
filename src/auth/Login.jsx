@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase/firebase.config";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2"; 
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,33 +14,53 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleLogin = (e) => {
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long");
-      return;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      await MySwal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: `Welcome back!`,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError(err.message);
+      await MySwal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: err.message,
+      });
     }
-    if (!/[A-Z]/.test(password)) {
-      setError("Password must have at least 1 uppercase letter");
-      return;
-    }
-    if (!/[a-z]/.test(password)) {
-      setError("Password must have at least 1 lowercase letter");
-      return;
-    }
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => navigate("/"))
-      .catch((err) => setError(err.message));
   };
 
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, googleProvider)
-      .then(() => navigate("/"))
-      .catch((err) => setError(err.message));
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      await MySwal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: `Welcome back!`,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError(err.message);
+      await MySwal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: err.message,
+      });
+    }
   };
 
   return (
@@ -45,7 +69,9 @@ const Login = () => {
         <h2 className="text-2xl font-bold mb-4 text-center text-base-content">
           Login
         </h2>
+
         {error && <p className="text-red-500 mb-2">{error}</p>}
+
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="email"
@@ -91,7 +117,6 @@ const Login = () => {
             Register
           </Link>
         </p>
-        
       </div>
     </div>
   );

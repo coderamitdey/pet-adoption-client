@@ -7,6 +7,7 @@ import {
 import { auth, googleProvider } from "../firebase/firebase.config";
 import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -17,36 +18,63 @@ const Register = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
 
+ 
+    if (!name || !photoURL || !email || !password) {
+      setError("All fields are required");
+      toast.error("All fields are required");
+      return;
+    }
+
+ 
     if (password.length < 6) {
       setError("Password must be at least 6 characters long");
+      toast.error("Password must be at least 6 characters long");
       return;
     }
     if (!/[A-Z]/.test(password)) {
       setError("Password must have at least 1 uppercase letter");
+      toast.error("Password must have at least 1 uppercase letter");
       return;
     }
     if (!/[a-z]/.test(password)) {
       setError("Password must have at least 1 lowercase letter");
+      toast.error("Password must have at least 1 lowercase letter");
       return;
     }
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        updateProfile(userCredential.user, { displayName: name, photoURL })
-          .then(() => navigate("/"))
-          .catch((err) => setError(err.message));
-      })
-      .catch((err) => setError(err.message));
+    try {
+    
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+
+      
+      await updateProfile(result.user, {
+        displayName: name,
+        photoURL,
+      });
+
+      toast.success("Registration successful!");
+      navigate("/"); 
+    } catch (err) {
+      setError(err.message);
+      toast.error("Registration failed!");
+    }
   };
 
-  const handleGoogleRegister = () => {
-    signInWithPopup(auth, googleProvider)
-      .then(() => navigate("/"))
-      .catch((err) => setError(err.message));
+ 
+  const handleGoogleRegister = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      toast.success("Registration successful!");
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+      toast.error("Registration failed!");
+    }
   };
 
   return (
@@ -67,6 +95,7 @@ const Register = () => {
             className="input input-bordered w-full"
             required
           />
+
           <input
             type="text"
             placeholder="Photo URL"
@@ -75,6 +104,7 @@ const Register = () => {
             className="input input-bordered w-full"
             required
           />
+
           <input
             type="email"
             placeholder="Email"
