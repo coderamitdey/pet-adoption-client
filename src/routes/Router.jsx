@@ -27,8 +27,8 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { path: "", element: <Home /> },
-      { path: "pets", element: <PetsSupplies /> },
-      { path: "listing/:id", element: <ListingDetails /> },
+      { path: "pets", element: <PrivateRoute><PetsSupplies /></PrivateRoute> },
+      { path: "listing/:id", element: <PrivateRoute><ListingDetails /></PrivateRoute>  },
       { path: "category/:category", element: <CategoryFiltered /> },
       {
         path: "add-listing",

@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
-
+console.log(loading);
   
   if (loading) {
     return (
@@ -14,12 +14,11 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-
   if (!user) {
     return <Navigate to="/auth/login" state={{ from: location }} replace />;
   }
 
-  
+ 
   return children;
 };
 
