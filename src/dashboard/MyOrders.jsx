@@ -4,19 +4,19 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import Footer from "../components/Footer";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import Footer from "../components/Footer";
 
 const MyOrders = () => {
   const { user } = useAuth();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     if (!user) return;
+
     axios
       .get(`http://localhost:5000/api/orders?email=${user.email}`)
       .then((res) => setOrders(res.data))
@@ -52,6 +52,7 @@ const MyOrders = () => {
 
     const doc = new jsPDF();
     doc.text("My Orders Report", 14, 20);
+
     const tableColumn = [
       "Listing Name",
       "Category",
@@ -97,13 +98,15 @@ const MyOrders = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">My Orders</h2>
-      <button onClick={handleDownload} className="btn btn-primary mb-4">
-        Download Report
-      </button>
+      <h2 className="text-2xl font-bold mb-4 flex justify-between items-center">
+        My Orders
+        <button onClick={handleDownload} className="btn btn-primary btn-sm">
+          Download Report
+        </button>
+      </h2>
 
       <div className="overflow-x-auto">
-        <table className="table w-full border">
+        <table className="table table-zebra w-full">
           <thead>
             <tr>
               <th>Listing Name</th>
@@ -127,7 +130,7 @@ const MyOrders = () => {
                 <td>{order.address}</td>
                 <td>{order.date}</td>
                 <td>{order.phone}</td>
-                <td>{order.notes || ""}</td>
+                <td>{order.notes || "-"}</td>
                 <td>
                   <button
                     onClick={() => handleDelete(order._id)}
@@ -142,7 +145,7 @@ const MyOrders = () => {
         </table>
       </div>
 
-      <div className="mt-20">
+      <div className="mt-10">
         <Footer />
       </div>
     </div>
