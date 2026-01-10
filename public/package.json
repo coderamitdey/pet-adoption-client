@@ -98,7 +98,7 @@
   {
     "name": "Pomeranian Puppy",
     "category": "Dog",
-    "price": 550,
+    "price": 5500,
     "location": "Dhaka, Bangladesh",
     "image": "https://i.ibb.co.com/MDp0ywhQ/dog5.jpg",
     "description": "Tiny Pomeranian puppy with fluffy fur."
@@ -158,5 +158,160 @@
     "location": "Khulna, Bangladesh",
     "image": "https://i.ibb.co.com/2YMZXX5R/cat7.jpg",
     "description": "Gentle and soft Ragdoll cat for families."
+  },
+  
+  {
+    "name": "Premium Dog Food Pack",
+    "category": "Pet Food",
+    "price": 1200,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/abc123/dogfood1.jpg",
+    "description": "High quality dog food with essential nutrients."
+  },
+  {
+    "name": "Cat Treats Pack",
+    "category": "Pet Food",
+    "price": 800,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co.com/def456/cattreats1.jpg",
+    "description": "Tasty cat treats for healthy snacks."
+  },
+  {
+    "name": "Bird Seed Mix",
+    "category": "Pet Food",
+    "price": 500,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/ghi789/birdseed1.jpg",
+    "description": "Nutritious seed mix for birds."
+  },
+  {
+    "name": "Dog Chew Toy",
+    "category": "Accessories",
+    "price": 350,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/jkl012/dogtoy1.jpg",
+    "description": "Fun chew toy for dogs."
+  },
+  {
+    "name": "Cat Scratching Post",
+    "category": "Accessories",
+    "price": 1500,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co.com/mno345/catscratch1.jpg",
+    "description": "Durable scratching post for cats."
+  },
+  {
+    "name": "Bird Perch Stand",
+    "category": "Accessories",
+    "price": 700,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/pqr678/birdperch1.jpg",
+    "description": "Comfortable perch for your bird."
+  },
+  {
+    "name": "Dog Shampoo",
+    "category": "Pet Care Products",
+    "price": 450,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/stu901/dogshampoo1.jpg",
+    "description": "Gentle shampoo for dogs, keeps coat shiny."
+  },
+  {
+    "name": "Cat Grooming Kit",
+    "category": "Pet Care Products",
+    "price": 1200,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co.com/vwx234/catgroom1.jpg",
+    "description": "Complete grooming kit for cats."
+  },
+  {
+    "name": "Bird Cage Cleaner",
+    "category": "Pet Care Products",
+    "price": 650,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co.com/yz567/birdclean1.jpg",
+    "description": "Safe cleaning solution for bird cages."
+  },
+  
+  {
+    "name": "Premium Dog Food",
+    "category": "Pet Food",
+    "price": 1200,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/dogfood1.jpg",
+    "description": "High-quality dog food for all breeds."
+  },
+  {
+    "name": "Cat Litter Box",
+    "category": "Accessories",
+    "price": 800,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/catlitter.jpg",
+    "description": "Easy-to-clean litter box for cats."
+  },
+  {
+    "name": "Bird Cage",
+    "category": "Accessories",
+    "price": 2500,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/birdcage.jpg",
+    "description": "Spacious cage suitable for parrots and canaries."
+  },
+  {
+    "name": "Pet Shampoo",
+    "category": "Pet Care Products",
+    "price": 600,
+    "location": "Sylhet, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/petshampoo.jpg",
+    "description": "Gentle shampoo for dogs and cats."
+  },
+  {
+    "name": "Dog Leash",
+    "category": "Accessories",
+    "price": 450,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/dogleash.jpg",
+    "description": "Durable leash for walking your dog."
+  },
+  {
+    "name": "Cat Scratching Post",
+    "category": "Accessories",
+    "price": 900,
+    "location": "Khulna, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/catscratch.jpg",
+    "description": "Fun scratching post for cats."
+  },
+  {
+    "name": "Vitamin Supplements",
+    "category": "Pet Care Products",
+    "price": 1100,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/vitamin.jpg",
+    "description": "Daily vitamins for healthy pets."
+  },
+  {
+    "name": "Pet Feeding Bowl Set",
+    "category": "Accessories",
+    "price": 750,
+    "location": "Chittagong, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/bowlset.jpg",
+    "description": "Stainless steel feeding bowls for pets."
+  },
+  {
+    "name": "Bird Seed Mix",
+    "category": "Pet Food",
+    "price": 400,
+    "location": "Dhaka, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/birdseed.jpg",
+    "description": "Nutritious seed mix for birds."
+  },
+  {
+    "name": "Pet Nail Clippers",
+    "category": "Pet Care Products",
+    "price": 350,
+    "location": "Sylhet, Bangladesh",
+    "image": "https://i.ibb.co/XYZ/nailclipper.jpg",
+    "description": "Safe and easy-to-use nail clippers for pets."
   }
+
 
