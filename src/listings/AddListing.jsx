@@ -20,25 +20,34 @@ const AddListing = () => {
   });
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]:
-        e.target.name === "price" ? Number(e.target.value) : e.target.value,
-    }));
+    const { name, value } = e.target;
+
+    if (name === "category") {
+      if (value === "Pets") {
+        setFormData({ ...formData, category: value, price: 0 });
+      } else {
+        setFormData({ ...formData, category: value });
+      }
+    } else if (name === "price") {
+      setFormData({ ...formData, price: Number(value) });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      await axios.post("http://localhost:5000/api/addlisting", formData);
+      await axios.post("http://localhost:5000/api/listings", formData);
       toast.success("Listing added successfully!");
-      navigate("/dashboard/my-listings"); // redirect to MyListings
+      navigate("/dashboard/my-listings");
     } catch (err) {
       console.error(err);
       toast.error("Failed to add listing");
     }
   };
+
+  const isPet = formData.category === "Pets";
 
   return (
     <div className="max-w-3xl mx-auto p-4">
@@ -75,6 +84,7 @@ const AddListing = () => {
           placeholder="Price"
           className="input input-bordered w-full"
           required
+          readOnly={isPet}
         />
 
         <input

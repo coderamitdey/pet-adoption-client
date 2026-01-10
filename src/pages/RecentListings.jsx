@@ -24,7 +24,7 @@ const RecentListings = () => {
       navigate("/auth/login");
       return;
     }
-    setVisibleCount(listings.length); // show all
+    setVisibleCount(listings.length);
   };
 
   const handleShowLess = () => {

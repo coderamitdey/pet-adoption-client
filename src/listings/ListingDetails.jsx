@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 
 const ListingDetails = () => {
-  const { id } = useParams(); // listing id from URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -24,14 +24,12 @@ const ListingDetails = () => {
     notes: "",
   });
 
-  // Redirect guest to login
   useEffect(() => {
     if (!user) {
       navigate("/auth/login");
     }
   }, [user, navigate]);
 
-  // Fetch listing details
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/listings/${id}`)
@@ -39,7 +37,6 @@ const ListingDetails = () => {
       .catch((err) => console.error(err));
   }, [id]);
 
-  // Prefill order form when modal opens
   useEffect(() => {
     if (listing && user) {
       setOrderData({
@@ -47,11 +44,7 @@ const ListingDetails = () => {
         email: user.email || "",
         listingId: listing._id,
         listingName: listing.name,
-        quantity:
-          listing.category.toLowerCase() === "dog" ||
-          listing.category.toLowerCase() === "cat"
-            ? 1
-            : 1,
+        quantity: 1,
         price: listing.price || 0,
         address: "",
         date: "",
@@ -69,11 +62,11 @@ const ListingDetails = () => {
     e.preventDefault();
     axios
       .post("http://localhost:5000/api/orders", orderData)
-      .then((res) => {
+      .then(() => {
         toast.success("Order placed successfully!");
         setShowOrderModal(false);
       })
-      .catch((err) => toast.error("Failed to place order"));
+      .catch(() => toast.error("Failed to place order"));
   };
 
   if (!listing) return <p className="text-center mt-10">Loading...</p>;
@@ -91,15 +84,10 @@ const ListingDetails = () => {
         <div className="card-body">
           <h2 className="text-3xl font-bold">{listing.name}</h2>
           <p className="text-gray-600">Category: {listing.category}</p>
-          <p className="text-gray-600">
-            Owner Email: {listing.ownerEmail || "N/A"}
-          </p>
+          <p className="text-gray-600">Owner Email: {listing.email || "N/A"}</p>
           <p className="text-gray-600">Location: {listing.location}</p>
           <p className="text-gray-600">
-            Price:{" "}
-            {listing.price
-              ? `৳${listing.price.toLocaleString()}`
-              : "Free for Adoption"}
+            Price: {listing.price ? `৳${listing.price.toLocaleString()}` : "Free for Adoption"}
           </p>
           <p className="mt-2">{listing.description}</p>
 
@@ -112,7 +100,6 @@ const ListingDetails = () => {
         </div>
       </div>
 
-      {/* Order Modal */}
       {showOrderModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg w-full max-w-lg relative">
