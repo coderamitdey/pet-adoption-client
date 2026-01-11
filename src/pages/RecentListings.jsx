@@ -13,10 +13,10 @@ const RecentListings = () => {
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/listings")
-      .then(res => {
+      .then((res) => {
         setListings(res.data || []);
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
   }, []);
 
   const handleShowMore = () => {
@@ -35,8 +35,11 @@ const RecentListings = () => {
     <div className="mt-10">
       <h2 className="text-2xl font-bold mb-4">Recent Listings</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {listings.slice(0, visibleCount).map(item => (
-          <div key={item._id} className="card bg-base-100 shadow-lg">
+        {listings.slice(0, visibleCount).map((item) => (
+          <div
+            key={item._id}
+            className="card bg-base-100 shadow-lg transition-transform duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
+          >
             <figure>
               <img
                 src={item.image || "https://via.placeholder.com/300x200"}
@@ -48,7 +51,10 @@ const RecentListings = () => {
               <h3 className="card-title">{item.name}</h3>
               <p>Category: {item.category}</p>
               <p>
-                Price: {item.price ? `৳${item.price.toLocaleString()}` : "Free for Adoption"}
+                Price:{" "}
+                {item.price
+                  ? `৳${item.price.toLocaleString()}`
+                  : "Free for Adoption"}
               </p>
               <p>Location: {item.location}</p>
               <button

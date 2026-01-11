@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext"; 
 
 const PetsSupplies = () => {
+  const { user } = useAuth(); 
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
   const [category, setCategory] = useState("All");
@@ -11,7 +13,7 @@ const PetsSupplies = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/listings")
+      .get("http://localhost:5000/api/pets_supplies")
       .then((res) => {
         setListings(res.data);
         setFilteredListings(res.data);
@@ -22,10 +24,29 @@ const PetsSupplies = () => {
   useEffect(() => {
     if (category === "All") {
       setFilteredListings(listings);
+    } else if (category === "Pets") {
+      setFilteredListings(
+        listings.filter(
+          (item) =>
+            item.category === "Dog" ||
+            item.category === "Cat" ||
+            item.category === "Bird"
+        )
+      );
     } else {
-      setFilteredListings(listings.filter((item) => item.category === category));
+      setFilteredListings(
+        listings.filter((item) => item.category === category)
+      );
     }
   }, [category, listings]);
+
+  const handleSeeDetails = (id) => {
+    if (!user) {
+      navigate("/auth/login"); 
+    } else {
+      navigate(`/pets_supplies/${id}`); 
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto p-4">
@@ -40,15 +61,15 @@ const PetsSupplies = () => {
         >
           <option value="All">All</option>
           <option value="Pets">Pets</option>
-          <option value="Food">Food</option>
+          <option value="Pet Food">Pet Food</option>
           <option value="Accessories">Accessories</option>
-          <option value="Care Products">Care Products</option>
+          <option value="Pet Care Products">Pet Care Products</option>
         </select>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {filteredListings.map((item) => (
-          <div key={item._id} className="card bg-base-100 shadow-md p-4">
+        {filteredListings.map((item, index) => (
+          <div key={item._id || index} className="card bg-base-100 shadow-md p-4">
             <img
               src={item.image || "https://via.placeholder.com/400x300"}
               alt={item.name}
@@ -61,7 +82,7 @@ const PetsSupplies = () => {
               Price: {item.price ? `৳${item.price.toLocaleString()}` : "Free"}
             </p>
             <button
-              onClick={() => navigate(`/listings/${item._id}`)}
+              onClick={() => handleSeeDetails(item._id)} 
               className="btn btn-primary btn-sm mt-2"
             >
               See Details

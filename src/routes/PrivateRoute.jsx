@@ -1,11 +1,10 @@
 import { Navigate, useLocation } from "react-router";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../context/AuthContext";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
-console.log(loading);
-  
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -18,7 +17,6 @@ console.log(loading);
     return <Navigate to="/auth/login" state={{ from: location }} replace />;
   }
 
- 
   return children;
 };
 

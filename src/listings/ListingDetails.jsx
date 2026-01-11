@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, useLocation } from "react-router";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 const ListingDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
 
   const [listing, setListing] = useState(null);
@@ -24,18 +25,19 @@ const ListingDetails = () => {
     notes: "",
   });
 
+  
   useEffect(() => {
-    if (!user) {
-      navigate("/auth/login");
-    }
-  }, [user, navigate]);
+    const isPets = location.pathname.includes("pets_supplies");
+    const apiUrl = isPets
+      ? `http://localhost:5000/api/pets_supplies/${id}`
+      : `http://localhost:5000/api/listings/${id}`;
 
-  useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/listings/${id}`)
+      .get(apiUrl)
       .then((res) => setListing(res.data))
       .catch((err) => console.error(err));
-  }, [id]);
+  }, [id, location.pathname]);
+
 
   useEffect(() => {
     if (listing && user) {
@@ -69,6 +71,15 @@ const ListingDetails = () => {
       .catch(() => toast.error("Failed to place order"));
   };
 
+  
+  const handleOrderClick = () => {
+    if (!user) {
+      navigate("/auth/login");
+      return;
+    }
+    setShowOrderModal(true);
+  };
+
   if (!listing) return <p className="text-center mt-10">Loading...</p>;
 
   return (
@@ -87,13 +98,16 @@ const ListingDetails = () => {
           <p className="text-gray-600">Owner Email: {listing.email || "N/A"}</p>
           <p className="text-gray-600">Location: {listing.location}</p>
           <p className="text-gray-600">
-            Price: {listing.price ? `৳${listing.price.toLocaleString()}` : "Free for Adoption"}
+            Price:{" "}
+            {listing.price
+              ? `৳${listing.price.toLocaleString()}`
+              : "Free for Adoption"}
           </p>
           <p className="mt-2">{listing.description}</p>
 
           <button
             className="btn btn-primary mt-4"
-            onClick={() => setShowOrderModal(true)}
+            onClick={handleOrderClick} 
           >
             Adopt / Order Now
           </button>

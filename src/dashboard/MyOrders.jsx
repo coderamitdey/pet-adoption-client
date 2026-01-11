@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import jsPDF from "jspdf";
-import "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 import Footer from "../components/Footer";
 
 const MyOrders = () => {
@@ -16,7 +16,6 @@ const MyOrders = () => {
 
   useEffect(() => {
     if (!user) return;
-
     axios
       .get(`http://localhost:5000/api/orders?email=${user.email}`)
       .then((res) => setOrders(res.data))
@@ -35,7 +34,6 @@ const MyOrders = () => {
       confirmButtonText: "Yes, delete it!",
       cancelButtonText: "Cancel",
     });
-
     if (result.isConfirmed) {
       axios
         .delete(`http://localhost:5000/api/orders/${orderId}`)
@@ -47,12 +45,14 @@ const MyOrders = () => {
     }
   };
 
+  const calculateTotal = () => {
+    return orders.reduce((total, order) => total + (order.price || 0) * order.quantity, 0);
+  };
+
   const handleDownload = () => {
     if (!orders.length) return toast.error("No orders to export");
-
     const doc = new jsPDF();
     doc.text("My Orders Report", 14, 20);
-
     const tableColumn = [
       "Listing Name",
       "Category",
@@ -64,7 +64,6 @@ const MyOrders = () => {
       "Notes",
     ];
     const tableRows = [];
-
     orders.forEach((order) => {
       const orderData = [
         order.listingName,
@@ -78,23 +77,19 @@ const MyOrders = () => {
       ];
       tableRows.push(orderData);
     });
-
-    doc.autoTable({
+    autoTable(doc, {
       head: [tableColumn],
       body: tableRows,
       startY: 30,
     });
-
+    const totalPrice = calculateTotal();
+    doc.text(`Total Price:  ${totalPrice.toLocaleString()}/=`, 14, doc.lastAutoTable.finalY + 10);
     doc.save(`MyOrders_${new Date().toISOString()}.pdf`);
   };
 
-  if (!user)
-    return (
-      <p className="text-center mt-10">Please login to see your orders.</p>
-    );
+  if (!user) return <p className="text-center mt-10">Please login to see your orders.</p>;
   if (loading) return <p className="text-center mt-10">Loading...</p>;
-  if (!orders.length)
-    return <p className="text-center mt-10">No orders yet.</p>;
+  if (!orders.length) return <p className="text-center mt-10">No orders yet.</p>;
 
   return (
     <div className="max-w-6xl mx-auto p-4">
@@ -104,7 +99,6 @@ const MyOrders = () => {
           Download Report
         </button>
       </h2>
-
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           <thead>
@@ -141,10 +135,16 @@ const MyOrders = () => {
                 </td>
               </tr>
             ))}
+            <tr className="font-bold text-xl">
+              <td colSpan={3} className="text-right">
+                Total:
+              </td>
+              <td>৳{calculateTotal().toLocaleString()}</td>
+              <td colSpan={5}></td>
+            </tr>
           </tbody>
         </table>
       </div>
-
       <div className="mt-10">
         <Footer />
       </div>
