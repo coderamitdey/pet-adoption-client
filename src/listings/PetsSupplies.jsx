@@ -69,18 +69,23 @@ const PetsSupplies = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {filteredListings.map((item, index) => (
-          <div key={item._id || index} className="card bg-base-100 shadow-md p-4">
+          <div
+            key={item._id || index}
+            className="card bg-base-100 shadow-lg transition-transform duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:shadow-2xl p-5"
+          >
             <img
               src={item.image || "https://via.placeholder.com/400x300"}
               alt={item.name}
-              className="h-48 w-full object-cover rounded-md mb-2"
+              className="h-40 w-80 mx-auto object-cover rounded-xl"
             />
-            <h3 className="text-xl font-bold">{item.name}</h3>
-            <p className="text-gray-600">Category: {item.category}</p>
-            <p className="text-gray-600">Location: {item.location}</p>
-            <p className="text-gray-600">
-              Price: {item.price ? `৳${item.price.toLocaleString()}` : "Free"}
-            </p>
+            <div className="flex-1">
+              <h3 className="text-lg font-bold truncate">{item.name}</h3>
+              <p className="text-gray-600 text-sm">Category: {item.category}</p>
+              <p className="text-gray-600 text-sm">Location: {item.location}</p>
+              <p className="text-gray-600 text-sm">
+                Price: {item.price ? `৳${item.price.toLocaleString()}` : "Free"}
+              </p>
+            </div>
             <button
               onClick={() => handleSeeDetails(item._id)} 
               className="btn btn-primary btn-sm mt-2"

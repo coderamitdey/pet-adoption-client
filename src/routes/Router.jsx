@@ -53,6 +53,11 @@ const router = createBrowserRouter([
       { path: "category/:category", element: <CategoryFiltered /> },
 
       {
+        path: "/category-filtered/:categoryName",
+        element: <CategoryFiltered />,
+      },
+
+      {
         path: "add-listing",
         element: (
           <PrivateRoute>

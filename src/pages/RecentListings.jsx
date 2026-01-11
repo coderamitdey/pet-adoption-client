@@ -10,13 +10,15 @@ const RecentListings = () => {
   const [listings, setListings] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
 
-  useEffect(() => {
+  const fetchListings = () => {
     axios
       .get("http://localhost:5000/api/listings")
-      .then((res) => {
-        setListings(res.data || []);
-      })
+      .then((res) => setListings(res.data || []))
       .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    fetchListings();
   }, []);
 
   const handleShowMore = () => {

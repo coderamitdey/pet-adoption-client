@@ -18,7 +18,7 @@ const Categories = () => {
       return;
     }
    
-    navigate(`/category-filtered-product/${categoryName}?email=${user.email}`);
+    navigate(`/category-filtered/${categoryName}?email=${user.email}`);
   };
 
   return (

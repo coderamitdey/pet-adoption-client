@@ -95,7 +95,7 @@ const ListingDetails = () => {
         <div className="card-body">
           <h2 className="text-3xl font-bold">{listing.name}</h2>
           <p className="text-gray-600">Category: {listing.category}</p>
-          <p className="text-gray-600">Owner Email: {listing.email || "N/A"}</p>
+          <p className="text-gray-600">Owner Email: {user.email || "N/A"}</p>
           <p className="text-gray-600">Location: {listing.location}</p>
           <p className="text-gray-600">
             Price:{" "}
