@@ -25,19 +25,17 @@ const ListingDetails = () => {
     notes: "",
   });
 
-  
   useEffect(() => {
     const isPets = location.pathname.includes("pets_supplies");
     const apiUrl = isPets
-      ? `http://localhost:5000/api/pets_supplies/${id}`
-      : `http://localhost:5000/api/listings/${id}`;
+      ? `https://pet-adoption-server-eta-eight.vercel.app/api/pets_supplies/${id}`
+      : `https://pet-adoption-server-eta-eight.vercel.app/api/listings/${id}`;
 
     axios
       .get(apiUrl)
       .then((res) => setListing(res.data))
       .catch((err) => console.error(err));
   }, [id, location.pathname]);
-
 
   useEffect(() => {
     if (listing && user) {
@@ -63,7 +61,10 @@ const ListingDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/orders", orderData)
+      .post(
+        "https://pet-adoption-server-eta-eight.vercel.app/api/orders",
+        orderData
+      )
       .then(() => {
         toast.success("Order placed successfully!");
         setShowOrderModal(false);
@@ -71,7 +72,6 @@ const ListingDetails = () => {
       .catch(() => toast.error("Failed to place order"));
   };
 
-  
   const handleOrderClick = () => {
     if (!user) {
       navigate("/auth/login");
@@ -105,10 +105,7 @@ const ListingDetails = () => {
           </p>
           <p className="mt-2">{listing.description}</p>
 
-          <button
-            className="btn btn-primary mt-4"
-            onClick={handleOrderClick} 
-          >
+          <button className="btn btn-primary mt-4" onClick={handleOrderClick}>
             Adopt / Order Now
           </button>
         </div>

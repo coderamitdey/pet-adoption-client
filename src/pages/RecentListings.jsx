@@ -12,7 +12,7 @@ const RecentListings = () => {
 
   const fetchListings = () => {
     axios
-      .get("http://localhost:5000/api/listings")
+      .get("https://pet-adoption-server-eta-eight.vercel.app/api/listings")
       .then((res) => setListings(res.data || []))
       .catch((err) => console.error(err));
   };

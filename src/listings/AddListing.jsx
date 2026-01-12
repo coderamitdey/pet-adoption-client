@@ -38,7 +38,10 @@ const AddListing = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/listings", formData);
+      await axios.post(
+        "https://pet-adoption-server-eta-eight.vercel.app/api/listings",
+        formData
+      );
       toast.success("Listing added successfully!");
       navigate("/dashboard/my-listings");
     } catch (err) {

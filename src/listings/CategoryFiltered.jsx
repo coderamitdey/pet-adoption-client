@@ -18,7 +18,7 @@ const CategoryFiltered = () => {
     }
 
     axios
-      .get("http://localhost:5000/api/pets_supplies")
+      .get("https://pet-adoption-server-eta-eight.vercel.app/api/pets_supplies")
       .then((res) => {
         let filtered = [];
         if (categoryName === "Pets") {

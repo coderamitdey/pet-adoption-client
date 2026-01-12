@@ -20,7 +20,9 @@ const MyListings = ({ onUpdate }) => {
 
   const fetchListings = () => {
     axios
-      .get(`http://localhost:5000/api/my-listings?email=${user.email}`)
+      .get(
+        `https://pet-adoption-server-eta-eight.vercel.app/api/my-listings?email=${user.email}`
+      )
       .then((res) => setListings(res.data));
   };
 
@@ -39,11 +41,15 @@ const MyListings = ({ onUpdate }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/api/listings/${id}`).then(() => {
-          setListings(listings.filter((i) => i._id !== id));
-          Swal.fire("Deleted!", "Your listing has been deleted.", "success");
-          if (onUpdate) onUpdate();
-        });
+        axios
+          .delete(
+            `https://pet-adoption-server-eta-eight.vercel.app/api/listings/${id}`
+          )
+          .then(() => {
+            setListings(listings.filter((i) => i._id !== id));
+            Swal.fire("Deleted!", "Your listing has been deleted.", "success");
+            if (onUpdate) onUpdate();
+          });
       }
     });
   };
@@ -65,7 +71,7 @@ const MyListings = ({ onUpdate }) => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:5000/api/listings/${editData._id}`,
+        `https://pet-adoption-server-eta-eight.vercel.app/api/listings/${editData._id}`,
         editData
       );
       setListings((prev) =>

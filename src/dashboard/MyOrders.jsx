@@ -17,7 +17,9 @@ const MyOrders = () => {
   useEffect(() => {
     if (!user) return;
     axios
-      .get(`http://localhost:5000/api/orders?email=${user.email}`)
+      .get(
+        `https://pet-adoption-server-eta-eight.vercel.app/api/orders?email=${user.email}`
+      )
       .then((res) => setOrders(res.data))
       .catch(() => toast.error("Failed to fetch orders"))
       .finally(() => setLoading(false));
@@ -36,7 +38,9 @@ const MyOrders = () => {
     });
     if (result.isConfirmed) {
       axios
-        .delete(`http://localhost:5000/api/orders/${orderId}`)
+        .delete(
+          `https://pet-adoption-server-eta-eight.vercel.app/api/orders/${orderId}`
+        )
         .then(() => {
           toast.success("Order deleted successfully!");
           setOrders((prev) => prev.filter((order) => order._id !== orderId));
@@ -46,7 +50,10 @@ const MyOrders = () => {
   };
 
   const calculateTotal = () => {
-    return orders.reduce((total, order) => total + (order.price || 0) * order.quantity, 0);
+    return orders.reduce(
+      (total, order) => total + (order.price || 0) * order.quantity,
+      0
+    );
   };
 
   const handleDownload = () => {
@@ -83,13 +90,21 @@ const MyOrders = () => {
       startY: 30,
     });
     const totalPrice = calculateTotal();
-    doc.text(`Total Price:  ${totalPrice.toLocaleString()}/=`, 14, doc.lastAutoTable.finalY + 10);
+    doc.text(
+      `Total Price:  ${totalPrice.toLocaleString()}/=`,
+      14,
+      doc.lastAutoTable.finalY + 10
+    );
     doc.save(`MyOrders_${new Date().toISOString()}.pdf`);
   };
 
-  if (!user) return <p className="text-center mt-10">Please login to see your orders.</p>;
+  if (!user)
+    return (
+      <p className="text-center mt-10">Please login to see your orders.</p>
+    );
   if (loading) return <p className="text-center mt-10">Loading...</p>;
-  if (!orders.length) return <p className="text-center mt-10">No orders yet.</p>;
+  if (!orders.length)
+    return <p className="text-center mt-10">No orders yet.</p>;
 
   return (
     <div className="max-w-6xl mx-auto p-4">

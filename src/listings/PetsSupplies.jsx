@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../context/AuthContext";
 
 const PetsSupplies = () => {
-  const { user } = useAuth(); 
+  const { user } = useAuth();
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
   const [category, setCategory] = useState("All");
@@ -13,7 +13,7 @@ const PetsSupplies = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/pets_supplies")
+      .get("https://pet-adoption-server-eta-eight.vercel.app/api/pets_supplies")
       .then((res) => {
         setListings(res.data);
         setFilteredListings(res.data);
@@ -42,9 +42,9 @@ const PetsSupplies = () => {
 
   const handleSeeDetails = (id) => {
     if (!user) {
-      navigate("/auth/login"); 
+      navigate("/auth/login");
     } else {
-      navigate(`/pets_supplies/${id}`); 
+      navigate(`/pets_supplies/${id}`);
     }
   };
 
@@ -87,7 +87,7 @@ const PetsSupplies = () => {
               </p>
             </div>
             <button
-              onClick={() => handleSeeDetails(item._id)} 
+              onClick={() => handleSeeDetails(item._id)}
               className="btn btn-primary btn-sm mt-2"
             >
               See Details
