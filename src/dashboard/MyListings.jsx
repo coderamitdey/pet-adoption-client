@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 const MyListings = ({ onUpdate }) => {
   const { user } = useAuth();
   const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState({
     _id: "",
@@ -19,11 +20,13 @@ const MyListings = ({ onUpdate }) => {
   });
 
   const fetchListings = () => {
+    setLoading(true);
     axios
       .get(
         `https://pet-adoption-server-eta-eight.vercel.app/api/my-listings?email=${user.email}`
       )
-      .then((res) => setListings(res.data));
+      .then((res) => setListings(res.data))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -85,8 +88,17 @@ const MyListings = ({ onUpdate }) => {
     }
   };
 
-  if (!listings.length)
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[300px]">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
+  if (!listings.length) {
     return <p className="text-center mt-10">No listings added yet.</p>;
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-4">
