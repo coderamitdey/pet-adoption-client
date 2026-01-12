@@ -94,10 +94,10 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="navbar-end flex items-center gap-3">
-        <button onClick={toggleTheme} className="btn btn-sm btn-outline flex items-center gap-2">
+      <div className="navbar-end flex items-center gap-2">
+        <button onClick={toggleTheme} className="btn btn-sm btn-outline flex items-center">
           {theme === "light" ? <Moon /> : <Sun />}
-          {theme === "light" ? "Dark" : "Light"}
+          {theme === "light" ? "D" : "L"}
         </button>
         {loading ? (
           <span className="loading loading-spinner loading-md text-primary"></span>
