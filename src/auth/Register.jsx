@@ -18,19 +18,16 @@ const Register = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
 
- 
     if (!name || !photoURL || !email || !password) {
       setError("All fields are required");
       toast.error("All fields are required");
       return;
     }
 
- 
     if (password.length < 6) {
       setError("Password must be at least 6 characters long");
       toast.error("Password must be at least 6 characters long");
@@ -48,24 +45,25 @@ const Register = () => {
     }
 
     try {
-    
-      const result = await createUserWithEmailAndPassword(auth, email, password);
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      
       await updateProfile(result.user, {
         displayName: name,
         photoURL,
       });
 
       toast.success("Registration successful!");
-      navigate("/"); 
+      navigate("/");
     } catch (err) {
       setError(err.message);
       toast.error("Registration failed!");
     }
   };
 
- 
   const handleGoogleRegister = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
