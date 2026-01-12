@@ -39,7 +39,12 @@ const CategoryFiltered = () => {
 
   if (!user)
     return <p className="text-center mt-10">Please login to see products.</p>;
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading)
+    return (
+      <p className="text-center mt-10">
+        <span className="loading loading-dots loading-xl"></span>
+      </p>
+    );
   if (!products.length)
     return (
       <p className="text-center mt-10">No products found in this category.</p>

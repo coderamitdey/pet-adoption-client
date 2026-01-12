@@ -37,8 +37,8 @@ const RecentListings = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[300px]">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="flex justify-center items-center ">
+        <span className="loading loading-dots loading-xl"></span>
       </div>
     );
   }
