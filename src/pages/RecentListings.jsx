@@ -9,12 +9,14 @@ const RecentListings = () => {
 
   const [listings, setListings] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
+  const [loading, setLoading] = useState(true);
 
   const fetchListings = () => {
+    setLoading(true);
     axios
       .get("https://pet-adoption-server-eta-eight.vercel.app/api/listings")
       .then((res) => setListings(res.data || []))
-      .catch((err) => console.error(err));
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -32,6 +34,14 @@ const RecentListings = () => {
   const handleShowLess = () => {
     setVisibleCount(6);
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[300px]">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-10">

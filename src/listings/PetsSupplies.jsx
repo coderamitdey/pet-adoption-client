@@ -8,17 +8,19 @@ const PetsSupplies = () => {
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
   const [category, setCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("https://pet-adoption-server-eta-eight.vercel.app/api/pets_supplies")
       .then((res) => {
         setListings(res.data);
         setFilteredListings(res.data);
       })
-      .catch((err) => console.error(err));
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -47,6 +49,14 @@ const PetsSupplies = () => {
       navigate(`/pets_supplies/${id}`);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[300px]">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto p-4">
