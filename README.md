@@ -74,28 +74,6 @@ dotenv
 
 CORS
 
-🏗️ Project Architecture
-pet-adoption/
-│
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── routes/
-│   │   ├── context/
-│   │   ├── assets/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── index.css
-│   ├── tailwind.config.js
-│   └── vite.config.js
-│
-├── server/
-│   ├── index.js
-│   ├── routes/
-│   └── package.json
-│
-└── README.md
 
 🔐 Authentication & Security
 
